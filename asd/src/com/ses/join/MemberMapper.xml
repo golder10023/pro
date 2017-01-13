@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.ses.join.MemberMapper">
+		<insert id="join" parameterType="joinVO">
+			INSERT INTO JOIN VALUES (#{email},JOIN_SEQ.NEXTVAL,'a','guest','n')
+		</insert>
+
+		<select id="existAlreadyEmail" parameterType="joinVO" resultType="joinVO">
+			SELECT * FROM JOIN
+			WHERE EMAIL=#{email}
+		</select> 
+
+		<select id="find" parameterType="joinVO" resultType="joinVO">
+			SELECT * FROM JOIN
+			WHERE EMAIL=#{email}
+		</select> 
+
+		<select id="authorizeUser" parameterType="joinVO" resultType="joinVO">
+			select * from join
+			where email=#{email} and password=#{password}
+			
+		</select> 
+		
+		<!-- <select id="res" parameterType="joinVO" resultType="reservationVO">
+			
+			SELECT 
+			* FROM 
+				RESERVATION 
+			WHERE 
+				EMAIL = #{email} and RESERVATIONDATE &lt;= sysdate
+		</select>  -->
+		
+		
+		<select id="session" parameterType="joinVO" resultType="joinVO">
+			SELECT * FROM JOIN
+			WHERE EMAIL=#{email} AND PASSWORD=#{password}
+		</select>
+		
+		<select id="video" parameterType="joinVO" resultType="joinVO">
+			SELECT * FROM JOIN
+			WHERE EMAIL=#{email} AND PASSWORD=#{password}
+		</select>
+		
+		<update id="joinUpdate" parameterType="joinVO">
+			UPDATE JOIN SET USER_M = #{user_m}, PASSWORD = #{password}, YN='Y' WHERE EMAIL=#{email}
+		</update>
+	</mapper>
+	
+	

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <package name="video" namespace="/video" extends="default">
+    
+
+
+		<action name="vlist" class="com.ses.video.VideoAction" method="vlist">
+			<result name="success">/blog.jsp</result>
+		</action>
+
+		<action name="vupload" class="com.ses.video.UploadAction" method="vupload">
+			<result name="success" type="redirect">vlist.action</result>
+		</action>
+
+		<action name="vread" class="com.ses.video.VideoAction" method="vread">
+			<result name="success">/blogpost.jsp</result>
+		</action>
+
+		<action name="vdelete" class="com.ses.video.VideoAction" method="vdelete">
+			<result name="success" type="redirect">vlist.action</result>
+		</action>
+
+		<action name="vmodify" class="com.ses.video.UploadAction" method="vmodify">
+			<result name="success" type="redirect">vlist.action</result>
+		</action>
+
+		<action name="vupdate" class="com.ses.video.VideoAction" method="vread">
+			<result name="success">/videomodify.jsp</result>
+		</action>
+
+		<!-- ajax action -->
+		<action name="vlike" class="com.ses.video.VideoAjaxAction" method="vlike">
+			<result type="json"></result>
+		</action>
+
+	</package>
+
+</struts>

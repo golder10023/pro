@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="reservation" namespace="/reservation" extends="default">
+
+		<!-- 시간대 예약하기 -->
+		<action name="reservationWrite" class="com.reservation.ReservationAction" method="reservationWrite">
+			<result name="success" type="redirect">/reservation/reservationList.action</result>
+		</action>
+		
+		<action name="reservationList" class="com.reservation.ReservationAction" method="reservationList">
+			<result name="success" >../reservation.jsp</result>
+		</action>
+		<!-- ajax action -->
+		
+		<action name="select" class="com.reservation.ReservationAjaxAction" method="reservated">
+			<result type="json"></result>
+		</action>
+	</package>
+	
+</struts>

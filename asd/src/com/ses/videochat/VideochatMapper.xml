@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ses.videochat.VideochatMapper">
+	<!--insert = 채팅방들어오면 DB입력 -->
+	<insert id="enter" parameterType="videochatVO">
+		INSERT INTO VIDEOCHAT VALUES (#{user_m},'0','n')
+	</insert>
+	
+	<!--select 1:1 채팅방 들어왔던 기록 체크  -->
+	<select id="recordList" resultType="videochatVO">
+		SELECT * FROM VIDEOCHAT WHERE USER_M=#{user_m}
+	</select>
+	
+	<!--채팅방에 들어왔던 적이 있으면 개인정보 수정  -->
+	<update id="recordUpdate" parameterType="map">
+		UPDATE VIDEOCHAT SET YN='n' WHERE USER_M=#{user_m}
+	</update>
+	
+	
+	<!--list = 채널버튼 누른 후 현재 로그인 정보/시리얼정보 출력  -->
+	<select id="rost" resultType="videochatVO">
+		SELECT * FROM VIDEOCHAT
+	</select>
+	
+	<!--select = 출력 후 정보 비교하기 위한 쿼리 -->
+	<select id="checkit" parameterType="videochatVO" resultType="videochatVO">
+		SELECT * FROM VIDEOCHAT WHERE USER_M=#{user_m}
+	</select>
+	
+	<!--update = channel버튼 누른 후 serial 번호 변경  -->
+	<update id="checkon" parameterType="map">
+		UPDATE VIDEOCHAT SET SERIAL=#{serial},YN='y' WHERE USER_M=#{user_m}
+	</update>
+	
+</mapper>

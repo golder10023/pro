@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="session" namespace="/session" extends="default">
+ 		
+
+        <action name="join" class="com.ses.join.SessionAction" method="join">
+        	<result name="success" type="redirect">/index.jsp</result>
+        </action>
+        
+        <action name="join1" class="com.ses.join.SessionAction" method="join1">
+        	<result name="success" type="redirect">/index.jsp</result>
+        </action>
+        
+        <action name="join2" class="com.ses.join.SessionAction" method="join2">
+        	<result name="success">/joinForm.jsp</result>
+        </action>
+        
+        <action name="logout" class="com.ses.join.SessionAction" method="logout">
+        	<result name="success" type="redirect">/index.jsp</result>
+        </action>
+        
+        <action name="video1" class="com.ses.join.SessionAction" method="video">
+        	<result name="success" type="redirect">/video.jsp</result>
+        </action>
+
+		<action name="login" class="com.ses.join.SessionAction" method="login">
+			<result name="success" type="redirect">/index.jsp</result>
+			<result name="login" type="redirect">/index.jsp</result>
+		</action>
+	
+	</package>
+	
+</struts>

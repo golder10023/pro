@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="joinVO" type="com.ses.join.JoinVO"/>
+		<typeAlias alias="videoVO" type="com.ses.video.VideoVO"/>
+		<typeAlias alias="boardVO" type="com.myboard.BoardVO"/>
+		<typeAlias alias="reservationVO" type="com.reservation.ReservationVO"/>
+		<typeAlias alias="videochatVO" type="com.ses.videochat.VideochatVO"/>
+		<typeAlias alias="bcommentVO" type="com.ses.bcomment.BcommentVO"/>
+		<typeAlias alias="vcommentVO" type="com.ses.vcomment.VcommentVO"/>
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+		<transactionManager type="JDBC" />
+		<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
+				<property name="username" value="hr" />
+				<property name="password" value="hr" />
+		</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/ses/join/MemberMapper.xml" />
+		<mapper resource="com/ses/video/VideoMapper.xml" />
+		<mapper resource="com/myboard/BoardMapper.xml"/>
+		<mapper resource="com/reservation/ReservationMapper.xml"/>
+		<mapper resource="com/ses/videochat/VideochatMapper.xml"/>
+		<mapper resource="com/ses/bcomment/BcommentMapper.xml"/>
+		<mapper resource="com/ses/vcomment/VcommentMapper.xml"/>
+	</mappers>
+</configuration>

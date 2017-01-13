@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myboard.BoardMapper">
+
+	<!-- 리스트 출력 -->
+	<select id="list" resultType="boardVO">
+		SELECT
+		*
+		FROM
+		BOARD_MAKEUP
+		ORDER BY
+		BOARDNUM
+	</select>
+
+	<!-- 글쓰기 -->
+	<insert id="write" parameterType="boardVO">
+		INSERT INTO
+		BOARD_MAKEUP
+		VALUES
+		(BOARD_SEQ.NEXTVAL,#{user_m},#{password},#{bfront},#{btitle},#{bcontent},'0',SYSDATE,0,0)
+	</insert>
+
+
+	<!-- 글 읽기 -->
+
+	<select id="read" resultType="boardVO">
+		SELECT
+		*
+		FROM
+		BOARD_MAKEUP
+		WHERE
+		BOARDNUM = #{boardnum}
+	</select>
+
+	<!-- 댓글 읽기 -->
+	<select id="bcomment" resultType="bcommentVO">
+		SELECT
+		bc.USER_M, bc.BCOMMENT,bc.BDATE 
+		FROM
+		BCOMMENT_MAKEUP bc,board_makeup b 
+		WHERE
+		bc.BOARDNUM = b.BOARDNUM and b.BOARDNUM =#{boardnum}
+		ORDER BY
+		bc.BCOMMENTNUM
+		
+	</select>
+
+
+	<!-- 글 삭제 -->
+	<delete id="delete" parameterType="hashMap">
+		DELETE FROM
+		BOARD_MAKEUP
+		WHERE
+		BOARDNUM = #{boardnum}
+		AND
+		PASSWORD = #{password}
+	</delete>
+
+	<!-- 조회수 증가 -->
+	<update id="increaseHit" parameterType="int">
+		UPDATE
+		BOARD_MAKEUP 
+		SET 
+		BHIT = BHIT+1
+		WHERE 
+		BOARDNUM = #{boardnum}
+	</update>
+
+	<!-- 글 수정 -->
+	<update id="modify" parameterType="boardVO">
+		UPDATE
+		BOARD_MAKEUP
+		SET
+		USER_M = #{user_m},
+		BFRONT = #{bfront},
+		BTITLE = #{btitle},
+		BCONTENT = #{bcontent}
+		WHERE
+		BOARDNUM = #{boardnum}
+		AND
+		PASSWORD = #{password}
+	</update>
+
+
+
+	<select id="getTotalBoardList" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM BOARD_MAKEUP
+		<if test="searchField != null">
+			<if test="searchField != ''">
+				<choose>
+					<when test="searchField == 'all'">
+						where BTITLE LIKE '%'||#{searchText}||'%' OR BCONTENT LIKE
+						'%'||#{searchText}||'%' OR USER_M LIKE '%'||#{searchText}||'%'
+					</when>
+					<when test="searchField != 'all'">
+						where ${searchField} LIKE '%'||#{searchText}||'%'
+					</when>
+					<!-- <when test="searchField == 'title'"> WHERE TITLE LIKE '%'||#{searchText}||'%' 
+						</when> <when test="searchField == 'content'"> WHERE CONTENT LIKE '%'||#{searchText}||'%' 
+						</when> <when test="searchField == 'custid'"> WHERE CUSTID LIKE '%'||#{searchText}||'%' 
+						</when> -->
+				</choose>
+			</if>
+		</if>
+	</select>
+
+	<select id="boardList" parameterType="map" resultType="boardVO">
+		SELECT * FROM
+		(
+		SELECT ROWNUM as ROWNUMBER, B.* FROM
+		(SELECT *
+
+		FROM BOARD_MAKEUP
+		<if test="searchField != null">
+			<if test="searchField != ''">
+				<choose>
+					<when test="searchField == 'all'">
+						where BTITLE LIKE '%'||#{searchText}||'%' OR BCONTENT LIKE
+						'%'||#{searchText}||'%' OR USER_M LIKE '%'||#{searchText}||'%' OR BOARDNUM LIKE '%'||#{searchText}||'%'
+					</when>
+					<when test="searchField != 'all'">
+						where ${searchField} LIKE '%'||#{searchText}||'%'
+					</when>
+				</choose>
+			</if>
+		</if>
+		ORDER BY BOARDNUM DESC)B
+		)B2
+	</select>
+	
+	
+	<!--좋아요  -->
+	<update id="blike" parameterType="int">
+		UPDATE
+		board_makeup
+		SET
+		blike = blike+1
+
+		WHERE
+		boardnum = #{boardnum}
+
+	</update>
+
+
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="board" namespace="/board" extends="default">
+
+		<!-- 리스트 출력 -->
+		<action name="list" class="com.myboard.BoardAction" method="listBoard">
+			<result name="success">/list.jsp</result>
+		</action>
+		
+		<!-- 게시글 읽기 -->
+		<action name="read" class="com.myboard.BoardAction" method="read">
+			<result name="success">/read.jsp</result>
+		</action>
+		
+		<!-- 게시글 작성 -->
+		<action name="write" class="com.myboard.BoardAction" method="write">
+			<result name="success" type="redirect">list.action</result>
+		</action>
+		
+		<!-- 게시글 삭제 -->
+		<action name="delete" class="com.myboard.BoardAction" method="delete">
+			<result name="success">/result.jsp</result>
+		</action>
+		
+		<!-- 게시글 수정 -->
+		<action name="modify" class="com.myboard.BoardAction" method="modify">
+			<result name="success">/result.jsp</result>
+		</action>
+		
+		<!-- ajax action -->
+		<action name="blike" class="com.myboard.BoardAjaxAction" method="blike">
+			<result type="json"></result>
+		</action>
+		
+	</package>
+	
+</struts>

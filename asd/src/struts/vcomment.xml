@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="vcomment" namespace="/vcomment" extends="default">
+
+		<!-- 리스트 출력 -->
+		<action name="vcomment" class="com.ses.vcomment.VcommentAction" method="vcomment">
+			<result type="json"></result>
+		</action>
+		
+		
+		<!-- 게시글 작성 -->
+		<action name="vreply" class="com.ses.vcomment.VcommentAction" method="vreply">
+			<result type="json"></result>
+		</action>
+		
+		
+		<!-- ajax action -->
+		<!-- 
+		<action name="blike" class="com.ses.bcomment.BcommentAction" method="blike">
+			<result type="json"></result>
+		</action>
+		 -->
+	</package>
+	
+</struts>

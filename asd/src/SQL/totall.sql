@@ -1,0 +1,48 @@
+CREATE TABLE BOARD_MAKEUP(
+BOARDNUM NUMBER PRIMARY KEY, 
+USER_M VARCHAR2(50) NOT NULL, 
+PASSWORD VARCHAR2(30),
+BFRONT VARCHAR2(50), 
+BTITLE VARCHAR2(100) NOT NULL, 
+BCONTENT CLOB ,
+BFILE CLOB,  
+BDATE DATE, 
+BHIT NUMBER, 
+BLIKE NUMBER
+);
+
+CREATE TABLE JOIN(
+EMAIL VARCHAR2(50),
+USER_M VARCHAR2(50),
+PASSWORD VARCHAR2(50),
+GRADE VARCHAR2(20),
+YN VARCHAR2(20)
+);
+
+CREATE TABLE VIDEO_MAKEUP(
+VIDEONUM NUMBER PRIMARY KEY,
+USER_M VARCHAR2(50) NOT NULL,
+VFRONT VARCHAR2(50), 
+VTITLE VARCHAR2(100)NOT NULL, 
+VDATE DATE, 
+VCONTENT VARCHAR2(300), 
+VHIT NUMBER , 
+VLINK VARCHAR2(400), 
+VIMG VARCHAR2(400),      
+VLIKE NUMBER 
+);
+
+create table expert_hour(
+	reservationDate varchar2(30),
+	email varchar2(30),
+	expert varchar2(30),
+	one_hour varchar2(30),
+	two_hour varchar2(30),
+	three_hour varchar2(30),
+	four_hour varchar2(30),
+	five_hour varchar2(30),
+	six_hour varchar2(30),
+	seven_hour varchar2(30),
+	eight_hour varchar2(30)
+);
+

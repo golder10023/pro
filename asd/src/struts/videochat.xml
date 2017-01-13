@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="videochat" namespace="/videochat" extends="default">
+	
+		<!-- ajax action -->
+		<!-- 리스트 출력 -->
+		<action name="rost" class="com.ses.videochat.VideochateAjaxAction" method="rost">
+			<result type="json"></result>
+		</action>
+
+		<!-- ajax action -->
+		<!-- 게시글 수정 -->
+		<action name="checkon" class="com.ses.videochat.VideochateAjaxAction" method="checkon">
+			<result type="json"></result>
+		</action>
+		
+		
+		<!-- 게시글 작성 -->
+		<action name="enter" class="com.ses.videochat.VideochatAction" method="enter">
+			<result name="success" type="redirect">/video.jsp</result>
+			<result name="error" type="redirect">/index.jsp</result>
+		</action>
+
+	</package>
+
+</struts>
